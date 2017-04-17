@@ -97,7 +97,9 @@ The code for histogram peak detection is in the function `find_peaks()`, sliding
 ####5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
 In order to calculate the lane curvature radius, I scaled the x and y coordinates of my lane pixels and then fit a new polynomial to the real-world-sized data. Using this new polynomial, I could then use the radius of curvature formula below to calculate the curve radius in metres at the base of the image:
+
 ![formula_img](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/radius_curvature_formula.png)
+
 I performed this on both the left and right lane lines, and then took the mean of these values for my final curvature value. The code for it can be found in the function `find_curvature()` in the code cell 3 of the IPython notebook.
 
 Also ,In order to compute the position of the car in the lane, I used the lane polyfit to find the bottom position of the left and right lanes respectively. Assuming the width of the lane was 3.7 metres, I calculated the scale of the transformed image, and then used the distance between the centre of the image and the centre of the lane to calculate the offset of the car.The code for this can be found in the function `find_offset()` in the code cell 3 of the IPython notebook.
