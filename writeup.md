@@ -37,6 +37,18 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 ###Pipeline (single images)
 
+1. Calibrate the camera with the input images once .
+2. Undistort the image. 
+3. Perform perspective transform on the undistorted image.
+4. Create a binary mask with threshold of H < 100 and S > 100 n HLS
+5. Create a binary mask with thresholded sobel gradients.
+6. Take the combination of both masks using bitwise OR.
+7. Perform sliding window search for the lane lines.
+8. Calculate the polyfit polynomials of the lane lines .
+9. Plot the polygon
+10. Find the radius of curvature for lane lines.
+11. Find the inverse perspective transform 
+12. Draw on the image frame or video stream.
 ####1. Provide an example of a distortion-corrected image.
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
 
