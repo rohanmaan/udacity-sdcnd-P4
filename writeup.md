@@ -39,9 +39,12 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 ####1. Provide an example of a distortion-corrected image.
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
+
 ![distorted_image](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/before_distort.png)
+
 For this the code is contained in the third cell of the IPython notebook located in "P4.ipynb" in the function created by me `cal_undistort_image()`
 Below is the undistorted image we get.
+
 ![undistorted_image](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/after_distort.png)
 
 ####2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
@@ -50,7 +53,7 @@ I converted the RGB image to HLS image, and then created a binary threshold mask
 
 After this, I also created a mask which used a threshold on the absolute Sobel magnitude. I decided to go with a mask which applied different Sobel thresholds to the top and bottom halves of the image, as the top half of the image had smoother gradients due to the perspective transform. In the end, I selected any pixel with > 10 sobel magnitude at the top of the image, and > 35 at the bottom of the image.I found that the HLS threshold worked better closer to the car, and the Sobel threshold worked better further away. Thus, I chose the maximum values ie a bitwise OR of these two thresholds.
 The binary thresholding code is in the function `hls_sobel_mask()` in cell no 3 in the same IPython notebook.
-![warped_img]() ![hls_sobel_mask]()
+
 
 
 
@@ -80,6 +83,7 @@ I verified that my perspective transform was working as expected by drawing the 
 After creating the binary thresholded mask, the next task was to find and fit the lane lines. To achieve this first I created a histogram of the masked pixels in the bottom half of the image.The histogram helped in identifying the peaks in the image. In order to find where the lane line begins, biggest peak in both the left and right sides are selected as the starting point:
 
 ![lane_line_histogram](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/histogram.png)
+
 I then used numpy to split the image into a specified number of 10 strips or windows, and in each strip, repeated the following process:
 1) Take the mean pixel x-position of the last strip (or histogram)
 2) Select all masked pixels within 80 pixels of this value
@@ -91,7 +95,10 @@ then be plotted on the input frame.
 In order to smooth out the final curve, I took a weighted mean with the last frame’s
 polynomial coefficients. (w=0.2)
 The code for histogram peak detection is in the function `find_peaks()`, sliding window  is in the the fucntion `window_search()` and for lane fitting is in the function `plot_polygon()` in the code cell no 3 of the IPython notebook.
-![mask](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/hsl_sobel_mask.png) ![fitted_curves](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/poly_lines.png)
+
+![mask](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/hsl_sobel_mask.png) 
+
+![fitted_curves](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/poly_lines.png)
 
 ####5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
