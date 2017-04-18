@@ -24,7 +24,7 @@ The goals / steps of this project are the following:
 ###Camera Calibration
 
 The camera calibration is used for determining the camera matrix of camera we use. For this we snap a picture of lets say a chessboard.
-![chessboard](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/calibration1.jpg)
+![chessboard](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/calibration1.jpg)
 
 
 The code for this step is contained in the first code cell of the IPython notebook located in "P4.ipynb" .  
@@ -33,7 +33,7 @@ I start by preparing "object points", which will be the (x, y, z) coordinates of
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 
-![undistorted_chessboard](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/undistort_output.png)
+![undistorted_chessboard](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/undistort_output.png)
 
 ###Pipeline (single images)
 
@@ -52,12 +52,12 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 ####1. Provide an example of a distortion-corrected image.
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
 
-![distorted_image](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/before_distort.png)
+![distorted_image](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/before_distort.png)
 
 For this the code is contained in the third cell of the IPython notebook located in "P4.ipynb" in the function created by me `cal_undistort_image()`
 Below is the undistorted image we get.
 
-![undistorted_image](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/after_distort.png)
+![undistorted_image](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/after_distort.png)
 
 ####2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 For creating a binary thresholded mask, I chose to apply various combinations of thresholds.
@@ -88,13 +88,13 @@ This resulted in the following source and destination points:
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
-![original_warped_images](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/warped.png)
+![original_warped_images](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/warped.png)
 
 ####4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
 After creating the binary thresholded mask, the next task was to find and fit the lane lines. To achieve this first I created a histogram of the masked pixels in the bottom half of the image.The histogram helped in identifying the peaks in the image. In order to find where the lane line begins, biggest peak in both the left and right sides are selected as the starting point:
 
-![lane_line_histogram](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/histogram.png)
+![lane_line_histogram](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/histogram.png)
 
 I then used numpy to split the image into a specified number of 10 strips or windows, and in each strip, repeated the following process:
 1) Take the mean pixel x-position of the last strip (or histogram)
@@ -108,9 +108,9 @@ In order to smooth out the final curve, I took a weighted mean with the last fra
 polynomial coefficients. (w=0.2)
 The code for histogram peak detection is in the function `find_peaks()`, sliding window  is in the the fucntion `window_search()` and for lane fitting is in the function `plot_polygon()` in the code cell no 3 of the IPython notebook.
 
-![mask](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/hsl_sobel_mask.png) 
+![mask](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/hsl_sobel_mask.png) 
 
-![fitted_curves](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/poly_lines.png)
+![fitted_curves](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/poly_lines.png)
 
 ####5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
@@ -124,8 +124,8 @@ Also ,In order to compute the position of the car in the lane, I used the lane p
 
 ####6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 The function `process_frame()` in the code cell 3 of the same IPython notebook returns the original image with the lane area between the two lanes in geen , along with the lane radius and offset shown in the top left corner.Below are some of the output images:
-![out1](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/out1.png) ![out2](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/out2.png)
-![out3](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/out3.png) ![out4](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/WriteUp_Images/out4.png)
+![out1](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/out1.png) ![out2](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/out2.png)
+![out3](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/out3.png) ![out4](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/out4.png)
 
 ---
 
