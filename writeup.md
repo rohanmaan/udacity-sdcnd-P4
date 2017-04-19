@@ -124,8 +124,8 @@ Also ,In order to compute the position of the car in the lane, I used the lane p
 
 ####6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 The function `process_frame()` in the code cell 3 of the same IPython notebook returns the original image with the lane area between the two lanes in geen , along with the lane radius and offset shown in the top left corner.Below are some of the output images:
-![out1](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/out1.png) ![out2](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/out2.png)
-![out3](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/out3.png) ![out4](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/out4.png)
+![out1](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/resub_out1.png) ![out2](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/resub_out2.png)
+![out3](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/resub_out3.png) ![out4](https://github.com/rohanmaan/udacity-sdcnd-P4/blob/master/Output_Images_for_writeup/resub_out4.png)
 
 ---
 
